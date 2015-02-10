@@ -39,16 +39,18 @@
 	* @author Mohan Late <mohan.late@gmail.com>
 	*/
 	var generateNumber = function(loopCount,sum){
+		//query URL
 		rp({ 
 			uri: serverUrl + randomNo(), resolveWithFullResponse: true 
 		})
 		.then(
 			function(response){
+				//get the response 
 				var num = response.body;
 				console.log("Generated number: " + num);
-				//Queries each URL, gets the associated response, and stores it in an array
+				//store the response in array
 				arrNumbers.push(num); 
-				//Adds up the total (sum) of the elements and outputs that to the console as well
+				//add up the total (sum) 
 				sum = sum + parseInt(num);
 		})
 		.finally(
@@ -56,9 +58,11 @@
 				if(loopCount){
 					generateNumber(--loopCount, sum);
 				} else {
+					//display the original array of numbers
 					console.log("Done. And the original array is : " + arrNumbers);
-					//Sorts the array and shows it in the console so that I can see that it's sorted it successfully
+					//sort the array and display it
 					console.log("The sorted array is : " + arrNumbers.sort()); 
+					//display the sum of all the numbers in the array
 					console.log("The total of the numbers in the array is: total =: " + sum);
 				}
 			});	
